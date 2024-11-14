@@ -9,6 +9,15 @@ form.addEventListener("submit", function (event) {
 
   let UserHours = document.querySelector("#hoursPerWeek").value;
   console.log({ UserLevel, UserHours, userEmail });
+  // Validate the user's input
+  // Check if the user has provided an email address
+  if (userEmail === "") {
+    alert("Please enter your email address.");
+
+    return;
+  }
+
+  console.log({ userEmail, userLevel, userHours });
 });
 
 // Store the user's email address as userEmail (string/text)
