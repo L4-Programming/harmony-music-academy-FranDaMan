@@ -3,16 +3,45 @@ let form = document.querySelector("form");
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
+
+  const maxHoursPerLevel = {
+    basic: 5,
+    advanced: 10,
+  };
+
   let userEmail = document.querySelector("#email").value;
 
-  let UserLevel = document.querySelector("#level").value;
+  let userLevel = document.querySelector("#level").value;
 
-  let UserHours = document.querySelector("#hoursPerWeek").value;
-  console.log({ UserLevel, UserHours, userEmail });
+  let userHours = parseInt(document.querySelector("#hoursPerWeek").value);
+
+  console.log({ userLevel, userHours, userEmail });
   // Validate the user's input
   // Check if the user has provided an email address
   if (userEmail === "") {
     alert("Please enter your email address.");
+
+    return;
+  }
+
+  if (userLevel === "") {
+    alert("Please enter a Level");
+    return;
+  }
+
+  if (isNaN(userHours) || userHours < 1) {
+    alert("Please enter at least one hour of tuition");
+    return;
+  }
+
+  if (!maxHoursPerLevel.hasOwnProperty(userLevel)) {
+    alert("invalid Level of study selected");
+    return;
+  }
+
+  const maxAllowedHours = maxHoursPerLevel[userLevel];
+  if (userHours > maxAllowedHours) {
+    alert(`you can only study a maximum of ${maxAllowedHours} hours`);
 
     return;
   }
