@@ -7,9 +7,15 @@
   <body>
     <form class="form-wrapper">
       <div class="form-section">
+        <img
+          src="./assets/harmony-music-academy-logo.svg"
+          alt="Harmony Music Academy logo"
+          class="mobile-display"
+        />
         <div class="form-field">
           <label for="email" class="form-label">Email*</label>
           <input
+            id="email"
             name="email"
             type="text"
             class="form-input"
@@ -18,7 +24,7 @@
         </div>
         <div class="form-field">
           <label for="level" class="form-label">Level*</label>
-          <select name="level" class="form-input">
+          <select id="level" name="level" class="form-input">
             <option value="basic">Basic</option>
             <option value="advanced">Advanced</option>
           </select>
@@ -26,7 +32,8 @@
         <div class="form-field">
           <label for="hoursPerWeek" class="form-label">Hours per week*</label>
           <input
-            name="hours-per-week"
+            id="hoursPerWeek"
+            name="hours-Per-Week"
             type="number"
             class="form-input"
             placeholder="How many?"
@@ -36,7 +43,7 @@
         <button type="submit" class="submit-btn">Sign up</button>
       </div>
 
-      <div class="Logo">
+      <div class="form-section mobile-hidden">
         <img
           src="./assets/harmony-music-academy-logo.svg"
           alt="Harmony Music Academy logo"

@@ -3,10 +3,15 @@ let form = document.querySelector("form");
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
+  let userEmail = document.querySelector("#email").value;
 
-  console.log("Form submitted");
+  let UserLevel = document.querySelector("#level").value;
+
+  let UserHours = document.querySelector("#hoursPerWeek").value;
+  console.log({ UserLevel, UserHours, userEmail });
 });
-// Get the user's email address-userEmail (string)
+
+// Store the user's email address as userEmail (string/text)
 // Get the user's level -UserLevel variables - conditional statement and buttons?
 // Get the user's hours of study - UserHours- Number
 // Validate the user's input-check if the us
