@@ -15,38 +15,43 @@ form.addEventListener("submit", function (event) {
 
   let userHours = parseInt(document.querySelector("#hoursPerWeek").value);
 
-  console.log({ userLevel, userHours, userEmail });
   // Validate the user's input
+  let errors = {};
+
+  // Helper function to add error messages
+  function addError(field, message) {
+    if (!errors[field]) {
+      errors[field] = { messages: [] };
+    }
+    errors[field].messages.push(message);
+  }
+
   // Check if the user has provided an email address
   if (userEmail === "") {
-    alert("Please enter your email address.");
-
-    return;
+    addError("email", "Please enter your email address.");
   }
 
   if (userLevel === "") {
-    alert("Please enter a Level");
-    return;
+    addError("level", "Please select a level of study.");
   }
 
   if (isNaN(userHours) || userHours < 1) {
-    alert("Please enter at least one hour of tuition");
-    return;
+    addError("hoursPerWeek", "Please enter at least one hour of tuition.");
   }
 
   if (!maxHoursPerLevel.hasOwnProperty(userLevel)) {
-    alert("invalid Level of study selected");
-    return;
+    addError("level", "Invalid level of study selected.");
   }
 
   const maxAllowedHours = maxHoursPerLevel[userLevel];
   if (userHours > maxAllowedHours) {
-    alert(`you can only study a maximum of ${maxAllowedHours} hours`);
-
-    return;
+    addError(
+      "hoursPerWeek",
+      `You can only study a maximum of ${maxAllowedHours} hours per week.`
+    );
   }
 
-  console.log({ userEmail, userLevel, userHours });
+  console.log({ errors });
 });
 
 // Store the user's email address as userEmail (string/text)
