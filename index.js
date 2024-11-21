@@ -77,6 +77,10 @@ form.addEventListener("submit", function (event) {
     }
   }
 
+  if (Object.keys(errors).length > 0) {
+    return;
+  }
+
   console.log({ userEmail, userLevel, userHours });
   console.log({ errors });
 });
