@@ -51,6 +51,33 @@ form.addEventListener("submit", function (event) {
     );
   }
 
+  for (let field in errors) {
+    let inputElement = document.querySelector(`#${field}`);
+    let labelElement = document.querySelector(`label[for=${field}]`);
+    if (inputElement) {
+      inputElement.classList.add("error-input");
+    }
+    if (labelElement) {
+      labelElement.classList.add("error-label");
+    }
+
+    let errorDiv = document.querySelector(`#${field}-error`);
+    if (errorDiv) {
+      errorDiv.classList.add("error-message");
+      let ul = document.createElement("ul");
+
+      errors[field].messages.forEach((message) => {
+        let li = document.createElement("li");
+        li.textContent = message;
+        ul.appendChild(li);
+      });
+
+      errorDiv.innerHTML = ""; // Clear any existing content
+      errorDiv.appendChild(ul);
+    }
+  }
+
+  console.log({ userEmail, userLevel, userHours });
   console.log({ errors });
 });
 
@@ -64,4 +91,4 @@ form.addEventListener("submit", function (event) {
 // Check if the number of hours requested is within the allowed range- less than one or equal to the maximum number for the level
 // Calculate the total cost
 // Calculate the total cost
-// Display the total cost to the user
+// Display the total cost to the user})
