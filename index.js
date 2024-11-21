@@ -1,13 +1,14 @@
+import { validateForm } from "./ValidateForm.js";
+
+import { calculateCosts } from "./CalculateCosts.js";
+
+import { displayResults } from "./DisplayingResults.js";
+
 // Capture user's input on form submission
 let form = document.querySelector("form");
 
 form.addEventListener("submit", function (event) {
   event.preventDefault();
-
-  const maxHoursPerLevel = {
-    basic: 5,
-    advanced: 10,
-  };
 
   let userEmail = document.querySelector("#email").value;
 
@@ -16,73 +17,17 @@ form.addEventListener("submit", function (event) {
   let userHours = parseInt(document.querySelector("#hoursPerWeek").value);
 
   // Validate the user's input
-  let errors = {};
+  const result = validateForm({ userEmail, userLevel, userHours });
 
-  // Helper function to add error messages
-  function addError(field, message) {
-    if (!errors[field]) {
-      errors[field] = { messages: [] };
-    }
-    errors[field].messages.push(message);
+  if (result) {
+    const output = calculateCosts(result);
+
+    console.log({ output });
+
+    displayResults(output);
   }
 
-  // Check if the user has provided an email address
-  if (userEmail === "") {
-    addError("email", "Please enter your email address.");
-  }
-
-  if (userLevel === "") {
-    addError("level", "Please select a level of study.");
-  }
-
-  if (isNaN(userHours) || userHours < 1) {
-    addError("hoursPerWeek", "Please enter at least one hour of tuition.");
-  }
-
-  if (!maxHoursPerLevel.hasOwnProperty(userLevel)) {
-    addError("level", "Invalid level of study selected.");
-  }
-
-  const maxAllowedHours = maxHoursPerLevel[userLevel];
-  if (userHours > maxAllowedHours) {
-    addError(
-      "hoursPerWeek",
-      `You can only study a maximum of ${maxAllowedHours} hours per week.`
-    );
-  }
-
-  for (let field in errors) {
-    let inputElement = document.querySelector(`#${field}`);
-    let labelElement = document.querySelector(`label[for=${field}]`);
-    if (inputElement) {
-      inputElement.classList.add("error-input");
-    }
-    if (labelElement) {
-      labelElement.classList.add("error-label");
-    }
-
-    let errorDiv = document.querySelector(`#${field}-error`);
-    if (errorDiv) {
-      errorDiv.classList.add("error-message");
-      let ul = document.createElement("ul");
-
-      errors[field].messages.forEach((message) => {
-        let li = document.createElement("li");
-        li.textContent = message;
-        ul.appendChild(li);
-      });
-
-      errorDiv.innerHTML = ""; // Clear any existing content
-      errorDiv.appendChild(ul);
-    }
-  }
-
-  if (Object.keys(errors).length > 0) {
-    return;
-  }
-
-  console.log({ userEmail, userLevel, userHours });
-  console.log({ errors });
+  console.log({ result });
 });
 
 // Store the user's email address as userEmail (string/text)
