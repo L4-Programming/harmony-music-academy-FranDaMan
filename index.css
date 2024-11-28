@@ -122,6 +122,26 @@ mobile-display {
   margin-bottom: 0.5rem;
 }
 
+#results dl {
+  padding: 2rem;
+  background-color: var(--white);
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: var(--box-shadow-lg);
+}
+#results dt {
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  font-size: 1.2rem;
+}
+#results dd {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+#results dd:last-of-type {
+  margin-bottom: 0;
+}
+
 .mobile-display {
   display: none;
 }

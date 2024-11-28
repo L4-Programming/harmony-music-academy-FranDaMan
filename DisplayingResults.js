@@ -7,6 +7,15 @@ export function displayResults(output) {
     <dl>
       <dt>Email</dt>
       <dd>${output.userEmail}</dd>
+
+        <dt>Level</dt>
+     <dd>${output.userLevel}</dd>
+
+     <dt>Hours per week</dt>
+     <dd>${output.userHours}</dd>
+
+     <dt>Total cost</dt>
+     <dd>£${output.totalCost}</dd>
     </dl>
   `;
 }
